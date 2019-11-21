@@ -1,0 +1,13 @@
+
+.progress-loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #fff8;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
