@@ -21,8 +21,8 @@ export class TemplateService {
       var chs = rows[i].getElementsByClassName('drop-placeholder');
       var vals = [];
       for( var ci = 0 ; ci < chs.length ; ci++ ) {
-        var node = chs[ci].childNodes[0];
-        vals.push(node.textContent);
+        var node = chs[ci].children[0];        
+        vals.push(node.getAttribute('data-tag'));
       }
       curRow.push(vals);
     }

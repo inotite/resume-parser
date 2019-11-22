@@ -21,10 +21,203 @@ export class HomeComponent implements OnInit {
   templateOb: Observable<any>;
 
   staticTags = [
-    'Company Logo',
-    'Account Manager Name',
-    'Account Manager Email'
+    {
+      title: 'Company Logo',
+      data: 'CompanyLogo'
+    },
+    {
+      title: 'Account Manager Name',
+      data: 'AMName',
+    },
+    {
+      title: 'Account Manager Email',
+      data: 'AMEmail'
+    }
   ];
+
+  daxtraTags = {
+    PersonName: [
+      {
+        title: "Family Name",
+        data: "PersonName.FamilyName"
+      }, {
+        title: "Formatted Name",
+        data: "PersonName.FormattedName"
+      }, {
+        title: "Given Name",
+        data: "PersonName.GivenName"
+      }, {
+        title: "Sex",
+        data: "PersonName.sex"
+      }
+    ],
+    ContactMethod: [
+      {
+        title: "Email Address",
+        data: "ContactMethod.InternetEmailAddress_main"
+      }, {
+        title: "Telephone",
+        data: "ContactMethod.Telephone_work"
+      }
+    ],
+    PostalAddress: [
+      {
+        title: "Country Code",
+        data: "ContactMethod.PostalAddress_main.CountryCode"
+      }, {
+        title: "Municipality",
+        data: "ContactMethod.PostalAddress_main.Municipality"
+      }, {
+        title: "Region",
+        data: "ContactMethod.PostalAddress_main.Region"
+      }],
+    EducationHistory: [
+      {
+        title: "Major",
+        data: "EducationHistory[index].Major"
+      }, {
+        title: "School Name",
+        data: "EducationHistory[index].SchoolName"
+      }, {
+        title: "School Type",
+        data: "EducationHistory[index].schoolType"
+      }, {
+        title: "Comments",
+        data: "EducationHistory[index].Comments"
+      },
+    ],
+    Degree: [
+      {
+        title: "Degree Name",
+        data: "EducationHistory[index].Degree.DegreeName"
+      }, {
+        title: "Degree Type",
+        data: "EducationHistory[index].Degree.degreeType"
+      }, {
+        title: "Degree Date",
+        data: "EducationHistory[index].Degree.DegreeDate"
+      },
+    ],
+    EduLocationSummary: [
+      {
+        title: "Country Code",
+        data: "EducationHistory[index].LocationSummary.CountryCode"
+      }, {
+        title: "Municipality",
+        data: "EducationHistory[index].LocationSummary.Municipality"
+      }, {
+        title: "Region",
+        data: "EducationHistory[index].LocationSummary.Region"
+      },
+    ],
+    EmploymentHistory: [
+      {
+        title: "Title",
+        data: "EmploymentHisotry[index].Title",
+        type: "Array"
+      },
+      {
+        title: "Position Type",
+        data: "EmploymentHisotry[index].PositionType"
+      },
+      {
+        title: "Job Area",
+        data: "EmploymentHisotry[index].JobArea"
+      },
+      {
+        title: "Employer Org Name",
+        data: "EmploymentHisotry[index].EmployerOrgName"
+      },
+      {
+        title: "Employer Org Type",
+        data: "EmploymentHisotry[index].employerOrgType"
+      },
+      {
+        title: "Org Name",
+        data: "EmploymentHisotry[index].OrgName"
+      },
+      {
+        title: "Start Date",
+        data: "EmploymentHisotry[index].StartDate"
+      },
+      {
+        title: "End Date",
+        data: "EmploymentHisotry[index].EndDate"
+      },
+      {
+        title: "Months Of Week",
+        data: "EmploymentHisotry[index].MonthsOfWeek"
+      },
+      {
+        title: "Description",
+        data: "EmploymentHisotry[index].Description"
+      },
+      {
+        title: "Industry Description",
+        data: "EmploymentHisotry[index].OrgIndustry.IndustryDescription"
+      }
+    ],
+    EmpLocationSummary: [
+      {
+        title: "Country Code",
+        data: "EmploymentHisotry[index].LocationSummary.CountryCode"
+      },
+      {
+        title: "Municipality",
+        data: "EmploymentHisotry[index].LocationSummary.Municipality"
+      },
+      {
+        title: "Region",
+        data: "EmploymentHisotry[index].LocationSummary.Region"
+      }
+    ],
+    Competency: [
+      {
+        title: "Skill Name",
+        data: "Competency[index].skillName"
+      },
+      {
+        title: "Skill Level",
+        data: "Competency[index].skillLevel"
+      },
+      {
+        title: "Skill Proficiency",
+        data: "Competency[index].skillProficiency"
+      },
+      {
+        title: "lastUsed",
+        data: "Competency[index].lastUsed"
+      },
+      {
+        title: "description",
+        data: "Competency[index].description"
+      }
+    ],
+    skillAliasArray: {
+      title: "Skill Alias Array",
+      data: "Competency[index].skillAliasArray",
+      type: "Array"
+    },
+    skillUsed: [
+      {
+        title: "Skill Used Type",
+        data: "Competency[index].skillUsed.type"
+      },
+      {
+        title: "Skill Used Value",
+        data: "Competency[index].skillUsed.value"
+      }
+    ],
+    RevisionDate: {
+      title: "Revision Date",
+      data: "RevisionDate"
+    },
+    ExecutiveSummary: {
+      title: "Executive Summary",
+      data: "ExecutiveSummary"
+    }
+  };
+
 
   done = [];
 
@@ -72,7 +265,7 @@ export class HomeComponent implements OnInit {
     var ele = event.nativeEvent.srcElement;
     var data = event.dragData;
 
-    ele.innerHTML = '<p>' + data + '</p>';
+    ele.innerHTML = `<p data-tag='${data.data}'>${data.title} / ${data.data}</p>`;
     ele.style.border = "unset";
     ele.style.backgroundColor = "transparent"
     console.log(this.done);
@@ -85,7 +278,7 @@ export class HomeComponent implements OnInit {
     for (var key in obj) {
       str += '\t'.repeat(depth) + key + ': ' + this.copyToString(obj[key], depth + 1) + '\n';
     }
-    str += '\t'.repeat(depth-1) + '}\n';
+    str += '\t'.repeat(depth - 1) + '}\n';
     return str;
   }
 
@@ -95,6 +288,7 @@ export class HomeComponent implements OnInit {
 
   previewResume(event) {
     this.resumeSubscription = this.resumeOb.subscribe(response => {
+      console.log(response.Resume.StructuredResume);
       if (response.hasOwnProperty('Resume')) {
         this.templateService.getTemplate();
         this.templateSubscription = this.templateOb.subscribe(result => {
@@ -110,7 +304,7 @@ export class HomeComponent implements OnInit {
             })
           }
         });
-        
+
       } else {
         this._snackBar.open("Please select resume first.", "Close", {
           duration: 4000
@@ -125,6 +319,4 @@ export class HomeComponent implements OnInit {
 
   ngOnDesetroy() {
   }
-  
-
 }

@@ -25,7 +25,7 @@
       <div class="resume-preview-page mat-elevation-z8" fxLayout="column">
         <div class="resume-page-row" *ngFor="let item of templateOb | async" fxLayout="row" fxLayoutGap="16px">
           <div *ngFor="let rItem of item" fxFlex="1 0 auto">
-            {{rItem}}
+            {{displayResumeItem(rItem)}}
           </div>
         </div>
       </div>

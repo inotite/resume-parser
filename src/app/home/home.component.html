@@ -4,7 +4,7 @@
       <div class="scrollable-content">
         <mat-tab-group dynamicHeight>
           <mat-tab label="Layout">
-            <div class="layout-container" cdkDropList [cdkDropListData]="layouts" [cdkDropListConnectedTo]="mainTempl">
+            <div class="layout-container" cdkDropList [cdkDropListConnectedTo]="mainTempl">
               <mat-card fxLayout="row" cdkDrag cdkDragData="1" class="mat-elevation-z4">
                 <div class="drop-placeholder"></div>
               </mat-card>
@@ -23,14 +23,14 @@
               </mat-card>
               <mat-card cdkDrag cdkDragData="4" class="mat-elevation-z4">
                 <div fxLayout="row" fxLayoutGap="16px">
-                  <div fxFlex="2 0 auto" class="drop-placeholder"></div>
-                  <div fxFlex="1 0 auto" class="drop-placeholder"></div>
+                  <div fxFlex="2 0 0" class="drop-placeholder"></div>
+                  <div fxFlex="1 0 0" class="drop-placeholder"></div>
                 </div>
               </mat-card>
               <mat-card cdkDrag cdkDragData="5" class="mat-elevation-z4">
                 <div fxLayout="row" fxLayoutGap="16px">
-                  <div fxFlex="1 0 auto" class="drop-placeholder"></div>
-                  <div fxFlex="2 0 auto" class="drop-placeholder"></div>
+                  <div fxFlex="1 0 0" class="drop-placeholder"></div>
+                  <div fxFlex="2 0 0" class="drop-placeholder"></div>
                 </div>
               </mat-card>
             </div>
@@ -38,7 +38,7 @@
           <mat-tab label="Tags">
             <h3>Company Info</h3>
             <div class="static-tag">
-              <mat-card *ngFor="let item of staticTags" draggable [dragData]="item">{{item}}</mat-card>
+              <mat-card *ngFor="let item of staticTags" draggable [dragData]="item">{{item.title}}</mat-card>
             </div>
             <mat-divider></mat-divider>
 
@@ -47,63 +47,44 @@
 
             <div class="daxtra-tag">
 
+              <h4>Person Name</h4>
+              <mat-card draggable *ngFor="let item of daxtraTags.PersonName" [dragData]="item">{{item.title}}</mat-card>
+              <mat-divider></mat-divider>
+
               <h4>Contact Method</h4>
-              <mat-card draggable>Internet Email Address</mat-card>
+              <mat-card draggable *ngFor="let item of daxtraTags.ContactMethod" [dragData]="item">{{item.title}}</mat-card>
               <h5>Postal Address</h5>
-              <mat-card draggable>CountryCode</mat-card>
-              <mat-card draggable>Municipality</mat-card>
-              <mat-card draggable>Region</mat-card>
+              <mat-card draggable *ngFor="let item of daxtraTags.PostalAddress" [dragData]="item">{{item.title}}</mat-card>
               <mat-divider></mat-divider>
 
               <h4>Education History</h4>
-              <mat-card draggable>Major</mat-card>
-              <mat-card draggable>School Name</mat-card>
-              <mat-card draggable>School Type</mat-card>
+              <mat-card draggable *ngFor="let item of daxtraTags.EducationHistory" [dragData]="item">{{item.title}}</mat-card>
               <h5>Degree</h5>
-              <mat-card draggable>Degree Date</mat-card>
-              <mat-card draggable>Degree Name</mat-card>
-              <mat-card draggable>Degree Type</mat-card>
+              <mat-card draggable *ngFor="let item of daxtraTags.Degree" [dragData]="item">{{item.title}}</mat-card>
               <h5>Location Summary</h5>
-              <mat-card draggable>Country Code</mat-card>
-              <mat-card draggable>Municipality</mat-card>
-              <mat-card draggable>Region</mat-card>
-              <h5>Comments</h5>
-              <mat-card draggable>Comments</mat-card>
+              <mat-card draggable *ngFor="let item of daxtraTags.EduLocationSummary" [dragData]="item">{{item.title}}</mat-card>
               <mat-divider></mat-divider>
 
               <h4>Employment History</h4>
-              <mat-card draggable>Title</mat-card>
-              <mat-card draggable>Position Type</mat-card>
-              <mat-card draggable>Org Name</mat-card>
-              <mat-card draggable>Start Date</mat-card>
-              <mat-card draggable>End Date</mat-card>
-              <mat-card draggable>Employer Org Name</mat-card>
-              <mat-card draggable>Job Area</mat-card>
-              <mat-card draggable>Months Of Work</mat-card>
-              <mat-card draggable>Description</mat-card>
+              <mat-card draggable *ngFor="let item of daxtraTags.EmploymentHistory" [dragData]="item">{{item.title}}</mat-card>
               <h5>Location Summary</h5>
-              <mat-card draggable>Country Code</mat-card>
-              <mat-card draggable>Municipality</mat-card>
-              <mat-card draggable>Region</mat-card>
-              <h5>Org Industry</h5>
-              <mat-card draggable>Industry Description</mat-card>
-              <mat-card draggable>primary Indicator</mat-card>
+              <mat-card draggable *ngFor="let item of daxtraTags.EmpLocationSummary" [dragData]="item">{{item.title}}</mat-card>
+              <mat-divider></mat-divider>
+
+              <h4>Competency</h4>
+              <mat-card draggable *ngFor="let item of daxtraTags.Competency" [dragData]="item">{{item.title}}</mat-card>
+              <h5>Skill Aliases</h5>
+              <mat-card draggable [dragData]="daxtraTags.skillAliasArray">{{daxtraTags.skillAliasArray.title}}</mat-card>
+              <h5>Skill Used</h5>
+              <mat-card draggable *ngFor="let item of daxtraTags.skillUsed" [dragData]="item">{{item.title}}</mat-card>
               <mat-divider></mat-divider>
 
               <h4>Executive Summary</h4>
-              <mat-card draggable>Executive Summary</mat-card>
-              <mat-divider></mat-divider>
-
-              <h4>Person Name</h4>
-              <mat-card draggable>Family Name</mat-card>
-              <mat-card draggable>Given Name</mat-card>
-              <mat-card draggable>Formatted Name</mat-card>
-              <mat-card draggable>Sex</mat-card>
+              <mat-card draggable [dragData]="daxtraTags.ExecutiveSummary">{{daxtraTags.ExecutiveSummary.title}}</mat-card>
               <mat-divider></mat-divider>
 
               <h4>Revision Date</h4>
-              <mat-card draggable>Revision Date</mat-card>
-              <mat-divider></mat-divider>
+              <mat-card draggable [dragData]="daxtraTags.RevisionDate">{{daxtraTags.RevisionDate.title}}</mat-card>
             </div>
           </mat-tab>
         </mat-tab-group>
